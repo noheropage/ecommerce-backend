@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
   try {
     const productData = await Product.findAll({
       include:  
-        [{ model: Category}, { model: Tag }]
+        [{ model: Category }, { model: Tag }]
     });
     res.status(200).json(productData)
   } catch (err) {
@@ -19,9 +19,23 @@ router.get('/', async (req, res) => {
 });
 
 // get one product
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
+  try {
+    const productData = await Product.findByPk(req.params.id, {
+      include: [{ model: Category }, { model: Tag }]
+    })
+  
+    if (!productData) {
+      res.status(404).json({ message: 'No product found with this id' })
+      return;
+    }
+  
+    res.status(200).json(productData);
+  } catch (error) {
+    res.status(500).json(error)
+  }
   
 });
 
