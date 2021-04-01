@@ -8,3 +8,4 @@ This project uses MySQL, Sequelize, and Express to create a backend framework fo
     npm install
 
 #### YouTube Walkthrough
+[E-Commerce Backend](https://www.youtube.com/watch?v=XFmGj5aKZcE)
